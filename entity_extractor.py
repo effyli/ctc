@@ -918,7 +918,7 @@ class EntityExtractor:
             {"role": "system", "content": system_message},
             {"role": "user", "content": prompt}
         ]
-        
+        print(prompt)
         print(f"Generating answer using DeepSeek API with prompt style: {prompt_style}...")
         response = self.deepseek.generate_response(messages, temperature=0.1)
         

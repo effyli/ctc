@@ -20,10 +20,10 @@ def visualize_entity_document_graph(G, question_entities=None, reachable_docs=No
     """
     try:
     # Use non-interactive backend if requested (for parallel processing)
-    if non_interactive:
+        if non_interactive:
             matplotlib.use('Agg')  # Set backend before importing pyplot
             
-        import matplotlib.pyplot as plt
+            import matplotlib.pyplot as plt
         
         # Create figure
             fig = plt.figure(figsize=(12, 10))
@@ -50,16 +50,16 @@ def visualize_entity_document_graph(G, question_entities=None, reachable_docs=No
             non_supporting_docs = [n for n in doc_nodes if not G.nodes[n].get('is_supporting', False)]
             
             if supporting_docs:
-            nx.draw_networkx_nodes(G, pos, nodelist=supporting_docs, node_color='#2ca02c', node_size=700, alpha=0.8, node_shape='s')
+                nx.draw_networkx_nodes(G, pos, nodelist=supporting_docs, node_color='#2ca02c', node_size=700, alpha=0.8, node_shape='s')
             if non_supporting_docs:
-            nx.draw_networkx_nodes(G, pos, nodelist=non_supporting_docs, node_color='#1f77b4', node_size=700, alpha=0.8, node_shape='s')
+                nx.draw_networkx_nodes(G, pos, nodelist=non_supporting_docs, node_color='#1f77b4', node_size=700, alpha=0.8, node_shape='s')
             
             # Highlight reachable documents if provided
             if reachable_docs:
                 reachable_nodes = [n for n in doc_nodes if n in reachable_docs]
                 if reachable_nodes:
-                nx.draw_networkx_nodes(G, pos, nodelist=reachable_nodes, node_color='#1f77b4', 
-                                      node_size=700, alpha=0.8, node_shape='s', linewidths=3, edgecolors='red')
+                    nx.draw_networkx_nodes(G, pos, nodelist=reachable_nodes, node_color='#1f77b4', 
+                                        node_size=700, alpha=0.8, node_shape='s', linewidths=3, edgecolors='red')
             
             # Draw edges
         if G.edges():
@@ -101,17 +101,17 @@ def visualize_entity_document_graph(G, question_entities=None, reachable_docs=No
             
             # Save the figure
             if save_path:
-            try:
-                plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white', edgecolor='none')
-                print(f"Saved bipartite graph visualization to {save_path}")
-            except Exception as e:
-                print(f"Warning: Could not save visualization to {save_path}: {e}")
-                # Try saving with simpler parameters
                 try:
-                    plt.savefig(save_path, dpi=150)
-                    print(f"Saved bipartite graph visualization to {save_path} (simplified)")
-                except Exception as e2:
-                    print(f"Error: Failed to save visualization: {e2}")
+                    plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white', edgecolor='none')
+                    print(f"Saved bipartite graph visualization to {save_path}")
+                except Exception as e:
+                    print(f"Warning: Could not save visualization to {save_path}: {e}")
+                    # Try saving with simpler parameters
+                    try:
+                        plt.savefig(save_path, dpi=150)
+                        print(f"Saved bipartite graph visualization to {save_path} (simplified)")
+                    except Exception as e2:
+                        print(f"Error: Failed to save visualization: {e2}")
             
             # Close the figure to free memory
             plt.close(fig)
@@ -119,8 +119,8 @@ def visualize_entity_document_graph(G, question_entities=None, reachable_docs=No
         # Return None for non-interactive mode
         if non_interactive:
             return None
-    else:
-        return fig
+        else:
+            return fig
             
     except Exception as e:
         print(f"Error creating bipartite graph visualization: {e}")
@@ -209,11 +209,11 @@ def visualize_entity_relationship_graph(G, question_entities=None, save_path=Non
     """
     try:
     # Use non-interactive backend if requested (for parallel processing)
-    if non_interactive:
+        if non_interactive:
             import matplotlib
             matplotlib.use('Agg')  # Set backend before importing pyplot
             
-        import matplotlib.pyplot as plt
+            import matplotlib.pyplot as plt
         
         # Create figure
             fig = plt.figure(figsize=(12, 10))
@@ -254,9 +254,9 @@ def visualize_entity_relationship_graph(G, question_entities=None, save_path=Non
                 other_nodes = [n for n in G.nodes() if n not in question_entities]
                 
                 if question_nodes:
-                nx.draw_networkx_nodes(G, pos, nodelist=question_nodes, node_color='#ff9999', node_size=500, alpha=0.8)
+                    nx.draw_networkx_nodes(G, pos, nodelist=question_nodes, node_color='#ff9999', node_size=500, alpha=0.8)
                 if other_nodes:
-                nx.draw_networkx_nodes(G, pos, nodelist=other_nodes, node_color='#ff7f0e', node_size=500, alpha=0.8)
+                    nx.draw_networkx_nodes(G, pos, nodelist=other_nodes, node_color='#ff7f0e', node_size=500, alpha=0.8)
             else:
                 nx.draw_networkx_nodes(G, pos, node_color='#ff7f0e', node_size=500, alpha=0.8)
         except Exception as e:
@@ -265,7 +265,7 @@ def visualize_entity_relationship_graph(G, question_entities=None, save_path=Non
             # Draw edges with arrows
         try:
             if G.edges():
-            nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5, arrows=True, arrowsize=15)
+                nx.draw_networkx_edges(G, pos, width=1.0, alpha=0.5, arrows=True, arrowsize=15)
         except Exception as e:
             print(f"Warning: Could not draw edges: {e}")
             
@@ -289,7 +289,7 @@ def visualize_entity_relationship_graph(G, question_entities=None, save_path=Non
                     edge_labels[(u, v)] = relation[:10] + '...' if len(relation) > 10 else relation
             
             if edge_labels:
-            nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=6)
+                nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=6)
         except Exception as e:
             print(f"Warning: Could not draw edge labels: {e}")
             
@@ -309,17 +309,17 @@ def visualize_entity_relationship_graph(G, question_entities=None, save_path=Non
             
             # Save the figure
             if save_path:
-            try:
-                plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white', edgecolor='none')
-                print(f"Saved entity relationship graph to {save_path}")
-            except Exception as e:
-                print(f"Warning: Could not save visualization to {save_path}: {e}")
-                # Try saving with simpler parameters
                 try:
-                    plt.savefig(save_path, dpi=150)
-                    print(f"Saved entity relationship graph to {save_path} (simplified)")
-                except Exception as e2:
-                    print(f"Error: Failed to save visualization: {e2}")
+                    plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white', edgecolor='none')
+                    print(f"Saved entity relationship graph to {save_path}")
+                except Exception as e:
+                    print(f"Warning: Could not save visualization to {save_path}: {e}")
+                    # Try saving with simpler parameters
+                    try:
+                        plt.savefig(save_path, dpi=150)
+                        print(f"Saved entity relationship graph to {save_path} (simplified)")
+                    except Exception as e2:
+                        print(f"Error: Failed to save visualization: {e2}")
             
             # Close the figure to free memory
             plt.close(fig)
@@ -327,7 +327,7 @@ def visualize_entity_relationship_graph(G, question_entities=None, save_path=Non
         # Return None for non-interactive mode
         if non_interactive:
             return None
-    else:
+        else:
             return fig
             
     except Exception as e:
